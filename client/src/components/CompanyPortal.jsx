@@ -193,7 +193,6 @@ export default function CompanyPortal({ profile, user, token, onLogout, refreshP
             <button 
               className={`nav-item ${activeTab === 'create-drive' ? 'active' : ''}`}
               onClick={() => setActiveTab('create-drive')}
-              disabled={!profile?.is_approved}
             >
               <Plus size={18} />
               Post Job Drive
