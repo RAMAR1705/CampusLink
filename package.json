@@ -2,6 +2,7 @@
   "name": "placement-portal-root",
   "version": "1.0.0",
   "description": "Root workspace for Placement Portal Web Application",
+  "license": "MIT",
   "scripts": {
     "install:server": "cd server && npm install",
     "install:client": "cd client && npm install",
