@@ -1,0 +1,14 @@
+{
+  "name": "placement-portal-root",
+  "version": "1.0.0",
+  "description": "Root workspace for Placement Portal Web Application",
+  "scripts": {
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "install-all": "npm run install:server && npm run install:client",
+    "seed": "cd server && node seed.js",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "start": "npm run install-all && npm run seed && echo 'Now run \"npm run server\" and \"npm run client\" in separate terminals.'"
+  }
+}
