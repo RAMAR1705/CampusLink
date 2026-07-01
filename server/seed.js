@@ -1,12 +1,12 @@
 import bcrypt from 'bcryptjs';
-import { query } from './db.js';
+import { query, dbReady } from './db.js';
 
 async function seedData() {
   console.log('Seeding mock placement database...');
 
   try {
-    // Wait briefly to ensure tables are initialized
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // Wait deterministically for database tables to be initialized
+    await dbReady;
 
     // Enable foreign keys
     await query.run('PRAGMA foreign_keys = ON');

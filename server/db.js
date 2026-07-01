@@ -6,9 +6,17 @@ import bcrypt from 'bcryptjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dbPath = path.join(__dirname, 'placement.db');
 
+let resolveDbReady;
+let rejectDbReady;
+export const dbReady = new Promise((resolve, reject) => {
+  resolveDbReady = resolve;
+  rejectDbReady = reject;
+});
+
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Error opening database:', err);
+    rejectDbReady(err);
   } else {
     console.log('Connected to SQLite database at:', dbPath);
     initDb();
@@ -148,8 +156,10 @@ async function initDb() {
     }
 
     console.log('Database tables verified/created successfully.');
+    resolveDbReady();
   } catch (err) {
     console.error('Error initializing tables:', err);
+    rejectDbReady(err);
   }
 }
 
