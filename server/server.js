@@ -529,6 +529,15 @@ app.get('/api/admin/analytics', authenticateToken, requireRole(['admin']), async
   }
 });
 
+// Serve frontend static assets in production
+const clientDistDir = path.join(__dirname, '../client/dist');
+app.use(express.static(clientDistDir));
+
+// Catch-all route to serve React's index.html for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientDistDir, 'index.html'));
+});
+
 // Start backend server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
